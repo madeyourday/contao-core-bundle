@@ -716,7 +716,18 @@ class Image
 			}
 		}
 
-		$objFile = new \File($src);
+		$themeIcons = 'system/themes/' . \Backend::getTheme() . '/icons/';
+
+		if (strncmp($src, $themeIcons, strlen($themeIcons)) === 0)
+		{
+			$objFile = new \stdClass;
+			$objFile->width = '16';
+			$objFile->height = '16';
+		}
+		else
+		{
+			$objFile = new \File($src);
+		}
 
 		// Strip the web/ prefix (see #337)
 		if (strncmp($src, 'web/', 4) === 0)
