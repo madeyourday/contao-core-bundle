@@ -248,11 +248,12 @@ class File extends \System
 					{
 						try
 						{
-							$dimensions = System::getContainer()
-								->get('contao.image.image_factory')
-								->create(TL_ROOT . '/' . $this->strFile)
-								->getDimensions()
-							;
+							$dimensions = new \Contao\Image\ImageDimensions(
+								System::getContainer()
+									->get('contao.image.imagine_svg')
+									->open(TL_ROOT . '/' . $this->strFile)
+									->getSize()
+							);
 
 							if (!$dimensions->isRelative() && !$dimensions->isUndefined())
 							{
